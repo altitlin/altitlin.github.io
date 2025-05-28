@@ -1,144 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Наша встреча</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding countdown</title>
   <style>
-    * {
+    *, *::after, *::before {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 2.25rem;
     }
 
-    html, body {
+    body,
+    html {
       height: 100%;
       margin: 0;
-    }
-
-    body {
-      align-items: center;
-      background-color: #f1f1f1;
-      display: flex;
-      font-family: -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen-Sans,
-        Ubuntu,
-        Cantarell,
-        "Helvetica Neue",
-        sans-serif;
-    }
-
-    .container {
-      margin: 0 auto;
-    }
-
-    .title {
-      color: #1c1c1c;
-      margin-bottom: 26px;
-      text-align: center;
-    }
-
-    .countdown-timer {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-
-    .countdown-timer li {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 8px;
-      color: #ccc;
-      width: 150px;
-      height: 150px;
-      border-radius: 12px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      background: linear-gradient(135deg, #ffe6f0 0%, #fff5f8 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #b33a3a;
+      padding: 2rem 1rem;
     }
 
-    .countdown-timer li:first-child,
-    .countdown-timer li:nth-child(2) {
-      background-color: #00a3d0;
+    .wedding-title {
+      font-size: 2.5rem;
+      margin-bottom: 64px;
+      color: #d94f70;
+      text-align: center;
+      /* Свечение и тени убраны */
     }
 
-    .countdown-timer li:last-child,
-    .countdown-timer li:nth-child(3) {
-      background-color: #1c1c1c;
+    .container {
+      display: flex;
+      gap: .5em;
+      justify-content: center;
+      align-items: center;
     }
 
-    .countdown-timer li div:first-child {
-      font-size: 4.4rem;
+    .flip-card {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
+      border-radius: .1em;
     }
 
-    .countdown-timer li div:last-child {
-      text-transform: uppercase;
+    .top,
+    .bottom,
+    .flip-card .top-flip,
+    .flip-card .bottom-flip {
+      height: .75em;
+      line-height: 1;
+      padding: .25em;
+      overflow: hidden;
+    }
+
+    .top,
+    .flip-card .top-flip {
+      background-color: #f7f7f7;
+      border-top-right-radius: .1em;
+      border-top-left-radius: .1em;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom,
+    .flip-card .bottom-flip {
+      background-color: white;
+      display: flex;
+      align-items: flex-end;
+      border-bottom-right-radius: .1em;
+      border-bottom-left-radius: .1em;
+    }
+
+    .flip-card .top-flip {
+      position: absolute;
+      width: 100%;
+      animation: flip-top 250ms ease-in;
+      transform-origin: bottom;
+    }
+
+    @keyframes flip-top {
+      100% {
+        transform: rotateX(90deg);
+      }
+    }
+
+    .flip-card .bottom-flip {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      animation: flip-bottom 250ms ease-out 250ms;
+      transform-origin: top;
+      transform: rotateX(90deg);
+    }
+
+    @keyframes flip-bottom {
+      100% {
+        transform: rotateX(0deg);
+      }
+    }
+
+    .container-segment {
+      display: flex;
+      flex-direction: column;
+      gap: .1em;
+      align-items: center;
+    }
+
+    .container-segment .segment-title {
+      font-weight: 600;
+      color: #d94f70;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .segment {
+      display: flex;
+      gap: .1em;
+    }
+
+    .segment-title {
       font-size: 1rem;
+    }
+
+    /* === Конфетти === */
+    .confetti-container {
+      position: fixed;
+      pointer-events: none;
+      top: 0; left: 0; width: 100%; height: 100%;
+      overflow: visible;
+      z-index: 10;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f5a3b9;
+      opacity: 0;
+      border-radius: 50%;
+      animation: confetti-fall 7s linear forwards, confetti-fade-in 1.5s ease forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confetti-fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.8;
+      }
+    }
+
+    /* === Сердечки === */
+    .decorations-container {
+      position: fixed;
+      top: 10%;
+      left: 5%;
+      width: 90%;
+      height: 80%;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 18px;
+      background: linear-gradient(135deg, #f5a3b9 0%, #d94f70 100%);
+      clip-path: polygon(50% 0%, 85% 25%, 100% 60%, 75% 100%, 50% 80%, 25% 100%, 0% 60%, 15% 25%);
+      opacity: 0.6;
+      animation: float-heart 5s ease-in-out infinite;
+    }
+
+    @keyframes float-heart {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
+  <h1 class="wedding-title">До нашей свадьбы 💍✨</h1>
+
   <div class="container">
-    <h1 class="title">Через сколько мы встретимся</h1>
-    <ul class="countdown-timer">
-      <li>
-        <div id="days">DD</div>
-        <div>Дни</div>
-      </li>
-      <li>
-        <div id="hours">HH</div>
-        <div>Часы</div>
-      </li>
-      <li>
-        <div id="minutes">MM</div>
-        <div>Минуты</div>
-      </li>
-      <li>
-        <div id="seconds">SS</div>
-        <div>Секунды</div>
-      </li>
-    </ul>
+    <div class="container-segment">
+      <div class="segment-title">Недели</div>
+      <div class="segment">
+        <div class="flip-card" data-weeks-tens>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+        <div class="flip-card" data-weeks-ones>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-segment">
+      <div class="segment-title">Дней</div>
+      <div class="segment">
+        <div class="flip-card" data-days-tens>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+        <div class="flip-card" data-days-ones>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-segment">
+      <div class="segment-title">Часов</div>
+      <div class="segment">
+        <div class="flip-card" data-hours-tens>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+        <div class="flip-card" data-hours-ones>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-segment">
+      <div class="segment-title">Минут</div>
+      <div class="segment">
+        <div class="flip-card" data-minutes-tens>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+        <div class="flip-card" data-minutes-ones>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-segment">
+      <div class="segment-title">Секунд</div>
+      <div class="segment">
+        <div class="flip-card" data-seconds-tens>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+        <div class="flip-card" data-seconds-ones>
+          <div class="top">0</div>
+          <div class="bottom">0</div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div id="congrats-message" style="display: none; margin-top: 2rem; text-align: center;">
+    <h2 style="color: #d94f70; font-size: 2.2rem;">💖 Ура! Настал наш день! 💍</h2>
+    <p style="color: #b33a3a; font-size: 1.5rem; margin-top: 1rem;">С любовью, навсегда вместе ✨</p>
+  </div>
+
+  <!-- Контейнеры для праздничных эффектов -->
+  <div class="confetti-container"></div>
+  <div class="decorations-container"></div>
+
   <script>
-    (function() {
-      const second = 1000
-      const minute = second * 60
-      const hour = minute * 60
-      const day = hour * 24
+    const countToDate = new Date('2026-05-23T23:59:59');
+    let previousTimeBetweenDates;
 
-      const nodeDays = document.getElementById('days')
-      const nodeHours = document.getElementById('hours')
-      const nodeMinutes = document.getElementById('minutes')
-      const nodeSeconds = document.getElementById('seconds')
+    setInterval(() => {
+      const currentDate = new Date();
+      const timeBetweenDates = Math.ceil((countToDate - currentDate) / 1000);
+      flipAllCards(timeBetweenDates);
 
-      const endDate = new Date('2025-02-09T09:00:00')
+      if (timeBetweenDates <= 0) {
+        document.getElementById('congrats-message').style.display = 'block';
+      }
 
-      const timer = setInterval(() => {
-        const now = new Date()
-        const distance = endDate - now
+      previousTimeBetweenDates = timeBetweenDates;
+    }, 250);
 
-        const days = Math.floor(distance / day)
-        const hours = Math.floor(distance % day / hour)
-        const minutes = Math.floor(distance % hour / minute)
-        const seconds = Math.floor(distance % minute / second)
+    function flipAllCards(time) {
+      if (time < 0) return;
 
-        nodeDays.innerText = days
-        nodeHours.innerText = String(hours).padStart(2, '0')
-        nodeMinutes.innerText = String(minutes).padStart(2, '0')
-        nodeSeconds.innerText = String(seconds).padStart(2, '0')
+      const seconds = time % 60;
+      const minutes = Math.floor(time / 60) % 60;
+      const hours = Math.floor(time / 3600) % 24;
+      const days = Math.floor(time / (3600 * 24)) % 7;
+      const weeks = Math.floor(time / (3600 * 24 * 7));
 
-        if (distance < 0) {
-          clearInterval(timer)
-        }
-      }, 0)
-    }())
+      flip(document.querySelector("[data-weeks-tens]"), Math.floor(weeks / 10));
+      flip(document.querySelector("[data-weeks-ones]"), weeks % 10);
+
+      flip(document.querySelector("[data-days-tens]"), Math.floor(days / 10));
+      flip(document.querySelector("[data-days-ones]"), days % 10);
+
+      flip(document.querySelector("[data-hours-tens]"), Math.floor(hours / 10));
+      flip(document.querySelector("[data-hours-ones]"), hours % 10);
+
+      flip(document.querySelector("[data-minutes-tens]"), Math.floor(minutes / 10));
+      flip(document.querySelector("[data-minutes-ones]"), minutes % 10);
+
+      flip(document.querySelector("[data-seconds-tens]"), Math.floor(seconds / 10));
+      flip(document.querySelector("[data-seconds-ones]"), seconds % 10);
+    }
+
+    function flip(flipCard, newNumber) {
+      const topHalf = flipCard.querySelector(".top");
+      const startNumber = parseInt(topHalf.textContent);
+      if (newNumber === startNumber) return;
+
+      const bottomHalf = flipCard.querySelector(".bottom");
+      const topFlip = document.createElement("div");
+      topFlip.classList.add("top-flip");
+      const bottomFlip = document.createElement("div");
+      bottomFlip.classList.add("bottom-flip");
+
+      topHalf.textContent = startNumber;
+      bottomHalf.textContent = startNumber;
+      topFlip.textContent = startNumber;
+      bottomFlip.textContent = newNumber;
+
+      topFlip.addEventListener("animationstart", () => {
+        topHalf.textContent = newNumber;
+      });
+
+      topFlip.addEventListener("animationend", () => {
+        topFlip.remove();
+      });
+
+      bottomFlip.addEventListener("animationend", () => {
+        bottomHalf.textContent = newNumber;
+        bottomFlip.remove();
+      });
+
+      flipCard.append(topFlip, bottomFlip);
+    }
+
+    // === Конфетти ===
+    const confettiContainer = document.querySelector('.confetti-container');
+    const decorationsContainer = document.querySelector('.decorations-container');
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = randomConfettiColor();
+      confetti.style.animationDuration = (6 + Math.random() * 2) + 's';
+      confettiContainer.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 7000);
+    }
+
+    function randomConfettiColor() {
+      const colors = ['#f5a3b9', '#d94f70', '#fff5f8', '#ffd1dc', '#f9e6ef'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    setInterval(createConfetti, 300);
+
+    // === Сердечки ===
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 90 + 'vw';
+      heart.style.top = (10 + Math.random() * 70) + 'vh';
+      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+      heart.style.animationDelay = (Math.random() * 5) + 's';
+      decorationsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 1500);
   </script>
 </body>
 </html>
