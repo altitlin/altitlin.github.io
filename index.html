@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Свадебное приглашение Александра и Виктории — 4 июля 2026, Вологодская область, с. Кичменгский Городок">
+<meta name="description" content="Свадебное приглашение Александра и Виктории — 4 июля 2026, Вологодская область, село Кичменгский Городок">
 <title>Александр & Виктория — 4 июля 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -785,7 +785,7 @@
     <p class="hero-eyebrow">Вы приглашены на свадьбу</p>
     <h1 class="hero-names">Александра<br><em>&amp;</em> Виктории</h1>
     <div class="hero-divider"></div>
-    <p class="hero-date">4 июля 2026 · Вологодская область, с. Кичменгский Городок</p>
+    <p class="hero-date">4 июля 2026 · Вологодская область, село Кичменгский Городок</p>
     <button class="hero-cta" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'})">
       Подтвердить присутствие
     </button>
@@ -897,8 +897,8 @@
       <div class="detail-card">
         <div class="detail-icon">📍</div>
         <p class="detail-label">Место</p>
-        <p class="detail-main">Кафе «СоВа</p>
-        <p class="detail-sub">Вологодская область, <br />с. Кичменгский Городок, <br />ул. Советская, 96Б</p>
+        <p class="detail-main">Кафе «СоВа»</p>
+        <p class="detail-sub">Вологодская область, <br />село Кичменгский Городок, <br />ул. Советская, 96Б</p>
       </div>
       <div class="detail-card">
         <div class="detail-icon">💍</div>
@@ -998,7 +998,7 @@
       <div class="location-info">
         <p class="label" style="margin-bottom:0">Адрес</p>
         <p class="location-address">Вологодская область<br>село Кичменгский Городок<br>ул. Советская, 96Б</p>
-        <p class="location-note">Парковка на месте. Если едете из другого города — напишите нам, поможем.</p>
+        <p class="location-note">Парковка на месте. Если едете из другого города — напишите нам, мы поможем.</p>
         <a class="btn-map" href="https://yandex.ru/maps/?text=Вологодская+область+Кичменгский+Городок+ул.+Советская+96Б" target="_blank" rel="noopener">
           <span>🗺</span> Открыть в Яндекс Картах
         </a>
@@ -1074,14 +1074,6 @@
           <span class="faq-icon">＋</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">Да, дети приветствуются! Для самых маленьких гостей будет организован уголок с аниматором. Укажите возраст ребёнка в комментарии.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q">
-          Будет ли трансфер?
-          <span class="faq-icon">＋</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Да! Трансфер от метро Чистые Пруды каждые 30 минут с 14:00 до 16:00. Подробности в контактах — уточните у организатора.</div></div>
       </div>
 
       <div class="faq-item">
@@ -1187,7 +1179,7 @@
         <p class="contact-role">Невеста</p>
         <p class="contact-name">Виктория</p>
         <div class="contact-links">
-          <a href="tel:+79817056851" class="contact-link">
+          <a href="tel:+79815076851" class="contact-link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.09 2.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             +7 981 507-68-51
           </a>
@@ -1203,7 +1195,7 @@
 </section>
 
 <footer>
-  <em>Александр &amp; Виктория</em> &nbsp;·&nbsp; 4 июля 2025 &nbsp;·&nbsp; С любовью ♡
+  <em>Александр &amp; Виктория</em> &nbsp;·&nbsp; 4 июля 2026 &nbsp;·&nbsp; С любовью ♡
 </footer>
 
 <!-- ═══════════════════════════════════
@@ -1290,12 +1282,17 @@ document.querySelectorAll('.radio-btn input').forEach(radio => {
   });
 });
 
-/* ── RSVP form ── */
-document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+const TG_TOKEN   = '8601142869:AAH27dPLrPg00UPENmU86UWCIdf9fXwhTPs';
+const TG_CHAT_ID = '1932431716';
+
+document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const fname = document.getElementById('fname').value.trim();
-  const lname = document.getElementById('lname').value.trim();
-  const attend = document.querySelector('input[name="attend"]:checked');
+
+  const fname   = document.getElementById('fname').value.trim();
+  const lname   = document.getElementById('lname').value.trim();
+  const attend  = document.querySelector('input[name="attend"]:checked');
+  const plus1   = document.getElementById('plus1').value;
+  const comment = document.getElementById('comment').value.trim();
 
   if (!fname || !lname) {
     alert('Пожалуйста, укажите имя и фамилию');
@@ -1306,15 +1303,45 @@ document.getElementById('rsvpForm').addEventListener('submit', (e) => {
     return;
   }
 
-  /* simulate submission */
   const btn = e.target.querySelector('.btn-submit');
   btn.textContent = 'Отправка…';
   btn.disabled = true;
 
-  setTimeout(() => {
+  const attendText = attend.value === 'yes' ? '✅ Да, приду' : '❌ Не смогу';
+  const plus1Text  = plus1 === 'yes' ? 'Да, с партнёром' : 'Нет';
+
+  const text = [
+    '💌 *Новый RSVP — Свадьба Александра и Елены*',
+    '',
+    `👤 *Гость:* ${fname} ${lname}`,
+    `📅 *Придёт:* ${attendText}`,
+    `👫 *+1:* ${plus1Text}`,
+    comment ? `💬 *Комментарий:* ${comment}` : null,
+    '',
+    `🕐 ${new Date().toLocaleString('ru-RU')}`,
+  ].filter(Boolean).join('\n');
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TG_CHAT_ID,
+        text,
+        parse_mode: 'Markdown'
+      })
+    });
+
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.description);
+
     document.getElementById('rsvpForm').style.display = 'none';
     document.getElementById('rsvpSuccess').classList.add('show');
-  }, 900);
+  } catch (err) {
+    btn.textContent = 'Подтвердить присутствие';
+    btn.disabled = false;
+    alert('Не удалось отправить. Проверьте соединение и попробуйте снова.');
+  }
 });
 
 /* ── Smooth active nav link ── */
