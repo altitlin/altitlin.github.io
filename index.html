@@ -16,9 +16,17 @@
 <meta property="og:description" content="Мы приглашаем вас на нашу свадьбу! 4 июля 2026, с. Кичменгский Городок — подтвердите своё участие!">
 <meta property="og:site_name" content="Свадьба Саши и Вики">
 
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Саша + Вика | 4 июля 2026 ♡">
+<meta name="twitter:description" content="Мы приглашаем вас на нашу свадьбу! 4 июля 2026, с. Кичменгский Городок">
+
 <!-- Telegram — использует og: теги, дополнительно: -->
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+
+<!-- ВКонтакте дополнительно -->
+<meta property="vk:image" content="">
 
 <!-- Apple / PWA -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -487,8 +495,14 @@
     .cal-table td.heart-date svg.heart-svg { width: 44px; height: 44px; }
 
     .date-when-svg { right: -65px; width: 75px; height: 68px; }
-    .hero-photo-sasha img { width: 165px; height: 264px; }
-    .hero-photo-vika  img { width: 190px; height: 264px; }
+    .hero-photo-sasha img { width: 120px; height: 192px; margin-right: -80px; }
+    .hero-photo-vika  img { width: 150px; height: 210px; }
+    .couple-photo .label.groom { left: -10px; }
+    .couple-photo .label.bride { right: -10px; }
+    .couple-photo .label svg { width: 90px; height: 70px; }
+    .hero-heart-top { left: calc(50% - 10px); }
+    .date-pill { min-width: 180px; font-size: 1.2rem; padding: 8px 24px; margin-top: -60px; }
+    .names { font-size: 2.6rem; }
   }
 </style>
 </head>
@@ -517,7 +531,7 @@
     </svg>
 
     <div class="label groom">
-      <svg width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="120" height="90" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs><path id="groomArc" d="M 5 55 Q 50 -5 100 20"/></defs>
         <text font-family="Caveat, cursive" font-size="26" font-style="italic" fill="#c0392b" opacity="0.85">
           <textPath href="#groomArc" startOffset="10%">жених</textPath>
@@ -528,7 +542,7 @@
     </div>
 
     <div class="label bride">
-      <svg width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="120" height="90" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs><path id="brideArc" d="M 20 20 Q 70 -5 115 55"/></defs>
         <text font-family="Caveat, cursive" font-size="26" font-style="italic" fill="#c0392b" opacity="0.85">
           <textPath href="#brideArc" startOffset="8%">невеста</textPath>
